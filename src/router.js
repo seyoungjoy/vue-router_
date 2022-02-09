@@ -6,7 +6,12 @@ Vue.use(Router)
 
 const About = () => import("./views/About.vue")
 const Users = () => import("./views/Users")
+const UsersDetail = () => import("./views/UsersDetail")
+const UsersEdit = () => import("./views/UsersEdit")
 const Test = () => import("./views/Test")
+const CarDetail = () => import("./views/CarDetail")
+const CarEdit= () => import("./views/CarEdit")
+
 
 
 export default new Router({
@@ -24,14 +29,38 @@ export default new Router({
       component:About,
     },
     {
-      path: '/users/:userId',
+      path: '/users',
       name: 'users',
       component:Users,
+      children:[
+        {
+          path:':id',
+          name:'users-detail',
+          component:UsersDetail,
+        },
+        {
+          path:':id/edit',
+          name:'users-edit',
+          component:UsersEdit,
+        },
+      ]
     },
     {
-      path: '/test/:testNumver',
+      path: '/test',
       name: 'test',
       component:Test,
+      children:[
+        {
+          path:':id',
+          name:'car-detail',
+          component:CarDetail,
+        },
+        {
+          path:':id/edit',
+          name:'car-edit',
+          component:CarEdit,
+        },
+      ]
     }
   ]
 })
